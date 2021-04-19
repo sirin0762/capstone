@@ -4,13 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud_gray"
+    android:padding="10dp"
     tools:context=".Mode_one">
 
     <TextView
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:text="Hello world"/>
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:text="자음모드"/>
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_below="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/background_white">
+
+        <TextView
+            android:id="@+id/main_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자음모드"
+            android:textColor="@color/black"
+            android:textSize="80sp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pre_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이전"
+            android:background="@color/black"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_gravity=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다음"
+            android:background="@color/black"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
