@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.example.capstone.MyApplication;
+
 public class MainActivity extends AppCompatActivity {
 
     RelativeLayout mode_one;
@@ -206,14 +208,16 @@ public class MainActivity extends AppCompatActivity {
     void connectSelectedDevice(String selectedDeviceName) {
         for(BluetoothDevice tempDevice : mPairedDevices) {
             if (selectedDeviceName.equals(tempDevice.getName())) {
-                mBluetoothDevice = tempDevice;
+                MyApplication.device = tempDevice;
+                System.out.print("1 : ");
+                System.out.println(MyApplication.device);
                 break;
             }
         }
         try {
-            mBluetoothSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(BT_UUID);
-            mBluetoothSocket.connect();
-            mThreadConnectedBluetooth = new ConnectedBluetoothThread(mBluetoothSocket);
+            MyApplication.mBluetoothSocket = MyApplication.device.createRfcommSocketToServiceRecord(BT_UUID);
+            MyApplication.mBluetoothSocket.connect();
+            mThreadConnectedBluetooth = new ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
             mThreadConnectedBluetooth.start();
             mBluetoothHandler.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
         } catch (IOException e) {
