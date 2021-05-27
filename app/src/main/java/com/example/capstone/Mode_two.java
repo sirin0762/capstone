@@ -12,21 +12,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.capstone.MyApplication.ConnectedBluetoothThread;
+
 import java.util.Locale;
 import java.util.UUID;
 
 import static android.speech.tts.TextToSpeech.ERROR;
-import com.example.capstone.MyApplication.ConnectedBluetoothThread;
 
 
-
-public class Mode_one extends AppCompatActivity {
+public class Mode_two extends AppCompatActivity {
 
     private TextToSpeech tts;
-    ImageButton cho_pre_button;
-    ImageButton cho_next_button;
+    ImageButton jung_pre_button;
+    ImageButton jung_next_button;
     TextView main_textview;
-    TextView mTvSendData;
 
 
     static Handler mBluetoothHandler;
@@ -34,38 +33,22 @@ public class Mode_one extends AppCompatActivity {
     ConnectedBluetoothThread mThreadConnectedBluetooth;
     BluetoothSocket mBluetoothSocket;
 
-    String cho = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
-    String cho_send = "가까나다따라마바빠사싸아자짜차카타파하";
-
-
+    String jung = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+    String jung_send = "가개갸걔거게겨계고과괘괴교구궈궤귀규그긔기";
+    
     int index = -1;
     final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    private void viewButton(int index){
-        if(index <= 0){
-            cho_pre_button.setVisibility(View.GONE);
-        }
-        else if(index > 0 && index < cho.length() - 1){
-            cho_pre_button.setVisibility(View.VISIBLE);
-            cho_next_button.setVisibility(View.VISIBLE);
-        }
-        else if(index >= cho.length() - 1){
-            cho_next_button.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mode_one);
+        setContentView(R.layout.activity_mode_two);
 
-        mTvSendData =  (EditText) findViewById(R.id.tvSendData);
+        main_textview = findViewById(R.id.jung_textview);
+        jung_pre_button = findViewById(R.id.jung_pre_button);
+        jung_next_button = findViewById(R.id.jung_next_button);
 
-        main_textview = findViewById(R.id.cho_textview);
-        cho_pre_button = findViewById(R.id.cho_pre_button);
-        cho_next_button = findViewById(R.id.cho_next_button);
-
-        final Boolean[] isStart = {false};
 
         try {
             mThreadConnectedBluetooth = new ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
@@ -86,36 +69,49 @@ public class Mode_one extends AppCompatActivity {
         });
         tts.setSpeechRate(0.75f);
 
-        cho_pre_button.setOnClickListener(new View.OnClickListener() {
+        jung_pre_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(index > 0){
                     index -= 1;
                     viewButton(index);
-                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    tts.speak(String.valueOf(jung.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(jung.charAt(index)));
                     main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                        mThreadConnectedBluetooth.write("2." + String.valueOf(jung_send.charAt(index)));
                     }
                 }
             }
         });
 
-        cho_next_button.setOnClickListener(new View.OnClickListener() {
+        jung_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(index < cho.length() - 1){
+                if(index < jung.length() - 1){
                     index += 1;
                     viewButton(index);
-                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    tts.speak(String.valueOf(jung.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(jung.charAt(index)));
                     main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                        mThreadConnectedBluetooth.write("2." + String.valueOf(jung_send.charAt(index)));
                     }
                 }
             }
         });
+    }
+
+    private void viewButton(int index){
+        if(index <= 0){
+            jung_pre_button.setVisibility(View.GONE);
+        }
+        else if(index > 0 && index < jung.length() - 1){
+            jung_pre_button.setVisibility(View.VISIBLE);
+            jung_next_button.setVisibility(View.VISIBLE);
+        }
+        else if(index >= jung.length() - 1){
+            jung_next_button.setVisibility(View.GONE);
+        }
     }
 }

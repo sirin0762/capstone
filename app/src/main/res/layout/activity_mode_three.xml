@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Mode_two">
+    tools:context=".Mode_three">
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/background_main_pink">
+        android:background="@drawable/background_main_green">
         
         <TextView
             android:id="@+id/title_title"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:text="중성모드"
+            android:text="종성모드"
             android:fontFamily="@font/nanumpenscript"/>
         <TextView
             android:layout_below="@+id/title_title"
@@ -37,7 +37,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/jung"
+        android:id="@+id/jong"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -45,8 +45,8 @@
         android:background="@drawable/background_gray">
 
         <ImageButton
-            android:id="@+id/jung_pre_button"
-            android:layout_toLeftOf="@id/jung_textview"
+            android:id="@+id/jong_pre_button"
+            android:layout_toLeftOf="@id/jong_textview"
             android:layout_marginRight="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
@@ -57,17 +57,17 @@
             android:background="@color/transparent"/>
 
         <TextView
-            android:id="@+id/jung_textview"
+            android:id="@+id/jong_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="중성"
+            android:text="종성"
             android:textColor="@color/black"
             android:textSize="80sp" />
 
         <ImageButton
-            android:id="@+id/jung_next_button"
-            android:layout_toRightOf="@id/jung_textview"
+            android:id="@+id/jong_next_button"
+            android:layout_toRightOf="@id/jong_textview"
             android:layout_marginLeft="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"

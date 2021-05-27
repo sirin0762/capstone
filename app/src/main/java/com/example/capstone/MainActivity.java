@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
-import android.os.SystemClock;
 
-import android.provider.Settings;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,16 +20,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import com.example.capstone.MyApplication;
+import com.example.capstone.MyApplication.ConnectedBluetoothThread;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        mode_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mode_two.class);
+                startActivity(intent);
+            }
+        });
+
+        mode_three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mode_three.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         mBtnBluetoothOn.setOnClickListener(new Button.OnClickListener() {
@@ -217,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             MyApplication.mBluetoothSocket = MyApplication.device.createRfcommSocketToServiceRecord(BT_UUID);
             MyApplication.mBluetoothSocket.connect();
-            mThreadConnectedBluetooth = new ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
+            mThreadConnectedBluetooth = new MyApplication.ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
             mThreadConnectedBluetooth.start();
             mBluetoothHandler.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
         } catch (IOException e) {
@@ -225,58 +237,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class ConnectedBluetoothThread extends Thread {
-        private final BluetoothSocket mmSocket;
-        private final InputStream mmInStream;
-        private final OutputStream mmOutStream;
-
-        public ConnectedBluetoothThread(BluetoothSocket socket) {
-            mmSocket = socket;
-            InputStream tmpIn = null;
-            OutputStream tmpOut = null;
-
-            try {
-                tmpIn = socket.getInputStream();
-                tmpOut = socket.getOutputStream();
-            } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "소켓 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
-            }
-
-            mmInStream = tmpIn;
-            mmOutStream = tmpOut;
-        }
-        public void run() {
-            byte[] buffer = new byte[1024];
-            int bytes;
-
-            while (true) {
-                try {
-                    bytes = mmInStream.available();
-                    if (bytes != 0) {
-                        SystemClock.sleep(100);
-                        bytes = mmInStream.available();
-                        bytes = mmInStream.read(buffer, 0, bytes);
-                        mBluetoothHandler.obtainMessage(BT_MESSAGE_READ, bytes, -1, buffer).sendToTarget();
-                    }
-                } catch (IOException e) {
-                    break;
-                }
-            }
-        }
-        public void write(String str) {
-            byte[] bytes = str.getBytes();
-            try {
-                mmOutStream.write(bytes);
-            } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "데이터 전송 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
-            }
-        }
-        public void cancel() {
-            try {
-                mmSocket.close();
-            } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "소켓 해제 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }
