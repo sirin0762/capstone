@@ -4,65 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroud_gray"
-    android:padding="10dp"
+    android:background="@color/white"
     tools:context=".Mode_one">
 
-    <TextView
-        android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:text="자음모드"/>
-
     <RelativeLayout
-        android:id="@+id/main"
-        android:layout_below="@+id/header"
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/background_white">
-
+        android:layout_height="250dp"
+        android:background="@drawable/background_main_skyblue">
+        
         <TextView
-            android:id="@+id/main_textview"
+            android:id="@+id/title_title"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            android:text="자음모드"
-            android:textColor="@color/black"
-            android:textSize="80sp"
-            android:layout_centerInParent="true"/>
-
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:text="초성모드"
+            android:fontFamily="@font/nanumpenscript"/>
+        <TextView
+            android:layout_below="@+id/title_title"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:text="좌우 버튼을 클릭하세요"
+            android:fontFamily="@font/nanumpenscript"/>
+        
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_below="@+id/main"
+    <RelativeLayout
+        android:id="@+id/cho"
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="350dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/background_gray">
 
-        <Button
-            android:id="@+id/pre_button"
+        <ImageButton
+            android:id="@+id/cho_pre_button"
+            android:layout_toLeftOf="@id/cho_textview"
+            android:layout_marginRight="50dp"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이전"
-            android:background="@color/black"/>
+            android:src="@drawable/left_button"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/cho_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="초성"
+            android:textColor="@color/black"
+            android:textSize="80sp" />
 
-        <Button
-            android:id="@+id/next_button"
-            android:layout_gravity=""
+        <ImageButton
+            android:id="@+id/cho_next_button"
+            android:layout_toRightOf="@id/cho_textview"
+            android:layout_marginLeft="50dp"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다음"
-            android:background="@color/black"/>
+            android:src="@drawable/right_button"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"/>
 
+    </RelativeLayout>
 
-    </LinearLayout>
 
 </RelativeLayout>

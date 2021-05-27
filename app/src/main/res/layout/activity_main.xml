@@ -86,22 +86,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/white">
 
         <RelativeLayout
             android:id="@+id/mode_one"
-            android:layout_width="185dp"
-            android:layout_height="170dp"
+            android:layout_width="118dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
-            android:background="#87CEEB">
+            android:background="@drawable/background_skyblue">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="초성 모드"
+                android:text="초성"
                 android:textColor="@color/black"
                 android:layout_gravity="center"/>
 
@@ -109,12 +112,12 @@
 
         <RelativeLayout
             android:id="@+id/mode_two"
-            android:layout_width="185dp"
-            android:layout_height="170dp"
+            android:layout_width="118dp"
+            android:layout_height="130dp"
             android:orientation="vertical"
-            android:background="#FFC0C8"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:background="@drawable/background_pink"
+            android:layout_toRightOf="@id/mode_one"
+            android:layout_marginRight="10dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -122,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="낱말 모드"
+                android:text="중성"
                 android:textColor="@color/black"
                 android:layout_gravity="center"/>
 
@@ -130,12 +133,10 @@
 
         <RelativeLayout
             android:id="@+id/mode_three"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:orientation="vertical"
-            android:background="#81C147"
-            android:layout_below="@+id/mode_one"
-            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/mode_two"
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:background="@drawable/background_green"
             android:clickable="true"
             android:focusable="true">
 
@@ -143,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="낱말 모드"
+                android:text="종성"
                 android:textColor="@color/black"
                 android:layout_gravity="center"/>
 

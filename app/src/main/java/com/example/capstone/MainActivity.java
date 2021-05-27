@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mThreadConnectedBluetooth != null) {
-                    mThreadConnectedBluetooth.write(mTvSendData.getText().toString());
+                    mThreadConnectedBluetooth.write("0." + mTvSendData.getText().toString());
                     mTvSendData.setText("");
                 }
             }

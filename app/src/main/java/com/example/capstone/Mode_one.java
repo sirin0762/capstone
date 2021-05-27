@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,8 @@ import com.example.capstone.MainActivity.ConnectedBluetoothThread;
 public class Mode_one extends AppCompatActivity {
 
     private TextToSpeech tts;
-    Button pre_button;
-    Button next_button;
+    ImageButton cho_pre_button;
+    ImageButton cho_next_button;
     TextView main_textview;
     TextView mTvSendData;
 
@@ -45,8 +46,9 @@ public class Mode_one extends AppCompatActivity {
     ConnectedBluetoothThread mThreadConnectedBluetooth;
     BluetoothSocket mBluetoothSocket;
 
-    String jaum = "ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ";
-    String moum = "ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ";
+    String cho = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+    String jung = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+    String jong = "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅊㅋㅌㅍㅎ";
 
     int index = 0;
     final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -59,12 +61,10 @@ public class Mode_one extends AppCompatActivity {
 
         mTvSendData =  (EditText) findViewById(R.id.tvSendData);
 
-        main_textview = findViewById(R.id.main_textview);
-        pre_button = findViewById(R.id.pre_button);
-        next_button = findViewById(R.id.next_button);
+        main_textview = findViewById(R.id.cho_textview);
+        cho_pre_button = findViewById(R.id.cho_pre_button);
+        cho_next_button = findViewById(R.id.cho_next_button);
 
-        System.out.print("2 : ");
-        System.out.println(MyApplication.device);
 
         try {
             mThreadConnectedBluetooth = new ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
@@ -85,31 +85,31 @@ public class Mode_one extends AppCompatActivity {
         });
         tts.setSpeechRate(0.75f);
 
-        pre_button.setOnClickListener(new View.OnClickListener() {
+        cho_pre_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(index > 0){
                     index -= 1;
-                    tts.speak(String.valueOf(jaum.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(jaum.charAt(index)));
-                    main_textview.setTextSize(300);
+                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write(String.valueOf(jaum.charAt(index)));
+                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho.charAt(index)));
                     }
                 }
             }
         });
 
-        next_button.setOnClickListener(new View.OnClickListener() {
+        cho_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(index < jaum.length() - 1){
+                if(index < cho.length() - 1){
                     index += 1;
-                    tts.speak(String.valueOf(jaum.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(jaum.charAt(index)));
-                    main_textview.setTextSize(300);
+                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write(String.valueOf(jaum.charAt(index)));
+                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho.charAt(index)));
                     }
                 }
             }
