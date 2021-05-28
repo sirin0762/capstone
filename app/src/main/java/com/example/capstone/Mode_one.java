@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,11 +13,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.UUID;
 
 import static android.speech.tts.TextToSpeech.ERROR;
+import static com.example.capstone.MyApplication.BT_CONNECTING_STATUS;
+
 import com.example.capstone.MyApplication.ConnectedBluetoothThread;
+import static com.example.capstone.MyApplication.mBluetoothHandler;
 
 
 
@@ -28,18 +33,13 @@ public class Mode_one extends AppCompatActivity {
     TextView main_textview;
     TextView mTvSendData;
 
-
-    static Handler mBluetoothHandler;
-
     ConnectedBluetoothThread mThreadConnectedBluetooth;
-    BluetoothSocket mBluetoothSocket;
 
     String cho = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
     String cho_send = "가까나다따라마바빠사싸아자짜차카타파하";
 
 
     int index = -1;
-    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private void viewButton(int index){
         if(index <= 0){
@@ -117,5 +117,47 @@ public class Mode_one extends AppCompatActivity {
                 }
             }
         });
+
+        mBluetoothHandler = new Handler(){
+            public void handleMessage(android.os.Message msg){
+                if(msg.what == MyApplication.BT_MESSAGE_READ){
+                    String readMessage = null;
+                    try {
+                        readMessage = new String((byte[]) msg.obj, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    String check = readMessage.replace("/r", "").substring(0, 1);
+                    Log.i("Check substring", check);
+                    int check_integer = Integer.parseInt(check);
+                    if(check_integer  < 1){
+                        Log.i("pre", "");
+                        if(index > 0){
+                            index -= 1;
+                            viewButton(index);
+                            tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                            main_textview.setText(String.valueOf(cho.charAt(index)));
+                            main_textview.setTextSize(100);
+                            if(mThreadConnectedBluetooth != null) {
+                                mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                            }
+                        }
+                    }
+                    else{
+                        Log.i("next", "");
+                        if(index < cho.length() - 1){
+                            index += 1;
+                            viewButton(index);
+                            tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                            main_textview.setText(String.valueOf(cho.charAt(index)));
+                            main_textview.setTextSize(100);
+                            if(mThreadConnectedBluetooth != null) {
+                                mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                            }
+                        }
+                    }
+                }
+            }
+        };
     }
 }

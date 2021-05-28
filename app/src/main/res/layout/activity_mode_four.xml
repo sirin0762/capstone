@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Mode_one">
+    tools:context=".Mode_three">
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/background_main_skyblue">
+        android:background="@drawable/background_main_words">
         
         <TextView
             android:id="@+id/title_title"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:text="초성모드"
+            android:text="낱말모드"
             android:fontFamily="@font/nanumpenscript"/>
         <TextView
             android:layout_below="@+id/title_title"
@@ -37,7 +37,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/cho"
+        android:id="@+id/words"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -45,8 +45,8 @@
         android:background="@drawable/background_gray">
 
         <ImageButton
-            android:id="@+id/cho_pre_button"
-            android:layout_toLeftOf="@id/cho_textview"
+            android:id="@+id/words_pre_button"
+            android:layout_toLeftOf="@id/words_textview"
             android:layout_marginRight="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
@@ -57,26 +57,26 @@
             android:background="@color/transparent"/>
 
         <TextView
-            android:id="@+id/cho_textview"
+            android:id="@+id/words_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="초성"
+            android:text="낱말"
             android:textColor="@color/black"
             android:textSize="80sp" />
 
         <ImageButton
-            android:id="@+id/cho_next_button"
-            android:layout_toRightOf="@id/cho_textview"
+            android:id="@+id/words_next_button"
+            android:layout_toRightOf="@id/words_textview"
             android:layout_marginLeft="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다음"
             android:src="@drawable/right_button"
             android:scaleType="fitCenter"
             android:background="@color/transparent"/>
 
     </RelativeLayout>
+
 
 </RelativeLayout>

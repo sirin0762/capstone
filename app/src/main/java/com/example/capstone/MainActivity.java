@@ -28,6 +28,15 @@ import java.util.UUID;
 
 import com.example.capstone.MyApplication.ConnectedBluetoothThread;
 
+import static com.example.capstone.MyApplication.BT_MESSAGE_READ;
+import static com.example.capstone.MyApplication.BT_REQUEST_ENABLE;
+import static com.example.capstone.MyApplication.mBluetoothAdapter;
+import static com.example.capstone.MyApplication.mBluetoothHandler;
+import static com.example.capstone.MyApplication.mListPairedDevices;
+import static com.example.capstone.MyApplication.mPairedDevices;
+import static com.example.capstone.MyApplication.mThreadConnectedBluetooth;
+
+
 public class MainActivity extends AppCompatActivity {
 
     RelativeLayout mode_one;
@@ -43,19 +52,7 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnConnect;
     Button mBtnSendData;
 
-    BluetoothAdapter mBluetoothAdapter;
-    Set<BluetoothDevice> mPairedDevices;
-    List<String> mListPairedDevices;
-
-    static Handler mBluetoothHandler;
-    ConnectedBluetoothThread mThreadConnectedBluetooth;
-    BluetoothDevice mBluetoothDevice;
-    BluetoothSocket mBluetoothSocket;
-
-    final static int BT_REQUEST_ENABLE = 1;
-    final static int BT_MESSAGE_READ = 2;
-    final static int BT_CONNECTING_STATUS = 3;
-    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    TextView test_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         mBtnBluetoothOff = (Button)findViewById(R.id.btnBluetoothOff);
         mBtnConnect = (Button)findViewById(R.id.btnConnect);
         mBtnSendData = (Button)findViewById(R.id.btnSendData);
+
+        test_text = findViewById(R.id.test_text);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mTvReceiveData.setText(readMessage);
+                    test_text.setText(readMessage);
                 }
             }
         };
@@ -227,11 +226,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         try {
-            MyApplication.mBluetoothSocket = MyApplication.device.createRfcommSocketToServiceRecord(BT_UUID);
+            MyApplication.mBluetoothSocket = MyApplication.device.createRfcommSocketToServiceRecord(MyApplication.BT_UUID);
             MyApplication.mBluetoothSocket.connect();
             mThreadConnectedBluetooth = new MyApplication.ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
             mThreadConnectedBluetooth.start();
-            mBluetoothHandler.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
+            mBluetoothHandler.obtainMessage(MyApplication.BT_CONNECTING_STATUS, 1, -1).sendToTarget();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
         }

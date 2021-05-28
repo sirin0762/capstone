@@ -1,33 +1,51 @@
 package com.example.capstone;
 
 import android.app.Application;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
-import static com.example.capstone.MainActivity.BT_MESSAGE_READ;
-import static com.example.capstone.MainActivity.mBluetoothHandler;
 
 public class MyApplication extends Application {
     private static Context context;
 
+    static BluetoothAdapter mBluetoothAdapter;
+    static Set<BluetoothDevice> mPairedDevices;
+    static List<String> mListPairedDevices;
+
+    static Handler mBluetoothHandler;
+    static ConnectedBluetoothThread mThreadConnectedBluetooth;
+    static BluetoothDevice mBluetoothDevice;
+    static BluetoothSocket mBluetoothSocket;
+
+    final static int BT_REQUEST_ENABLE = 1;
+    final static int BT_MESSAGE_READ = 2;
+    final static int BT_CONNECTING_STATUS = 3;
+    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+
     public void onCreate() {
         super.onCreate();
         MyApplication.context = MyApplication.getAppContext();
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     public static Context getAppContext() {
         return MyApplication.context;
     }
     public static BluetoothDevice device;
-
-    public static BluetoothSocket mBluetoothSocket;
 
     public static class ConnectedBluetoothThread extends Thread {
         private final BluetoothSocket mmSocket;

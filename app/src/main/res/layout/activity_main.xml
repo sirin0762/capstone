@@ -149,6 +149,29 @@
                 android:layout_gravity="center"/>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mode_four"
+            android:layout_below="@+id/mode_one"
+            android:layout_width="118dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/background_words">
+
+            <TextView
+                android:id="@+id/test_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="낱말"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+
+        </RelativeLayout>
     </RelativeLayout>
 
 
