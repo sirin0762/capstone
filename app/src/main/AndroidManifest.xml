@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstone">
+
         <activity
             android:name=".Mode_one"
             android:label="@string/title_activity_mode_one"
@@ -23,7 +24,19 @@
             android:theme="@style/Theme.Capstone.NoActionBar" />
         <activity
             android:name=".Mode_three"
-            android:label="mode_two"
+            android:label="mode_three"
+            android:theme="@style/Theme.Capstone.NoActionBar" />
+        <activity
+            android:name=".Mode_four"
+            android:label="mode_four"
+            android:theme="@style/Theme.Capstone.NoActionBar" />
+        <activity
+            android:name=".Mode_five"
+            android:label="mode_five"
+            android:theme="@style/Theme.Capstone.NoActionBar" />
+        <activity
+            android:name=".Mode_six"
+            android:label="mode_six"
             android:theme="@style/Theme.Capstone.NoActionBar" />
         <activity
             android:name=".MainActivity"

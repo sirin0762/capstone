@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout mode_one;
     RelativeLayout mode_two;
     RelativeLayout mode_three;
-
+    RelativeLayout mode_four;
+    RelativeLayout mode_five;
+    RelativeLayout mode_six;
 
     TextView mTvBluetoothStatus;
     TextView mTvReceiveData;
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         mode_one = findViewById(R.id.mode_one);
         mode_two = findViewById(R.id.mode_two);
         mode_three = findViewById(R.id.mode_three);
+        mode_four = findViewById(R.id.mode_four);
+        mode_five = findViewById(R.id.mode_five);
+        mode_six = findViewById(R.id.mode_six);
 
         mTvBluetoothStatus = (TextView)findViewById(R.id.tvBluetoothStatus);
         mTvReceiveData = (TextView)findViewById(R.id.tvReceiveData);
@@ -70,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         mBtnBluetoothOff = (Button)findViewById(R.id.btnBluetoothOff);
         mBtnConnect = (Button)findViewById(R.id.btnConnect);
         mBtnSendData = (Button)findViewById(R.id.btnSendData);
-
-        test_text = findViewById(R.id.test_text);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -96,6 +99,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Mode_three.class);
+                startActivity(intent);
+            }
+        });
+
+        mode_four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mode_four.class);
+                startActivity(intent);
+            }
+        });
+
+        mode_five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mode_five.class);
+                startActivity(intent);
+            }
+        });
+
+        mode_six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mode_six.class);
                 startActivity(intent);
             }
         });
@@ -138,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    test_text.setText(readMessage);
                 }
             }
         };

@@ -5,67 +5,48 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.capstone.MyApplication.ConnectedBluetoothThread;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Locale;
 
 import static android.speech.tts.TextToSpeech.ERROR;
-
-import com.example.capstone.MyApplication.ConnectedBluetoothThread;
 import static com.example.capstone.MyApplication.mBluetoothHandler;
 
 
-
-public class Mode_one extends AppCompatActivity {
+public class Mode_six extends AppCompatActivity {
 
     private TextToSpeech tts;
-    ImageButton cho_pre_button;
-    ImageButton cho_next_button;
+    ImageButton six_pre_button;
+    ImageButton six_next_button;
     TextView main_textview;
-    TextView mTvSendData;
-
+    
     ConnectedBluetoothThread mThreadConnectedBluetooth;
 
-    String cho = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
-    String cho_send = "가까나다따라마바빠사싸아자짜차카타파하";
-
-
+    String six = "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+    String six_send = "각갂갃간갅갆갇갈갉갊갋갌갍갏감갑값갓갔강갖갗갘같갚갛";
+    
     int index = -1;
-
+    
     Date d1 = new Date();
 
-    private void viewButton(int index){
-        if(index <= 0){
-            cho_pre_button.setVisibility(View.GONE);
-        }
-        else if(index > 0 && index < cho.length() - 1){
-            cho_pre_button.setVisibility(View.VISIBLE);
-            cho_next_button.setVisibility(View.VISIBLE);
-        }
-        else if(index >= cho.length() - 1){
-            cho_next_button.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mode_one);
+        setContentView(R.layout.activity_mode_six);
 
-        mTvSendData =  (EditText) findViewById(R.id.tvSendData);
+        main_textview = findViewById(R.id.six_textview);
+        six_pre_button = findViewById(R.id.six_pre_button);
+        six_next_button = findViewById(R.id.six_next_button);
 
-        main_textview = findViewById(R.id.cho_textview);
-        cho_pre_button = findViewById(R.id.cho_pre_button);
-        cho_next_button = findViewById(R.id.cho_next_button);
-
-        final Boolean[] isStart = {false};
 
         try {
             mThreadConnectedBluetooth = new ConnectedBluetoothThread(MyApplication.mBluetoothSocket);
@@ -86,33 +67,33 @@ public class Mode_one extends AppCompatActivity {
         });
         tts.setSpeechRate(0.75f);
 
-        cho_pre_button.setOnClickListener(new View.OnClickListener() {
+        six_pre_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(index > 0){
                     index -= 1;
                     viewButton(index);
-                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    tts.speak(String.valueOf(six.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(six.charAt(index)));
                     main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                        mThreadConnectedBluetooth.write("3." + String.valueOf(six_send.charAt(index)));
                     }
                 }
             }
         });
 
-        cho_next_button.setOnClickListener(new View.OnClickListener() {
+        six_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(index < cho.length() - 1){
+                if(index < six.length() - 1){
                     index += 1;
                     viewButton(index);
-                    tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                    main_textview.setText(String.valueOf(cho.charAt(index)));
+                    tts.speak(String.valueOf(six.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                    main_textview.setText(String.valueOf(six.charAt(index)));
                     main_textview.setTextSize(100);
                     if(mThreadConnectedBluetooth != null) {
-                        mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                        mThreadConnectedBluetooth.write("3." + String.valueOf(six_send.charAt(index)));
                     }
                 }
             }
@@ -147,24 +128,24 @@ public class Mode_one extends AppCompatActivity {
                             if(index > 0){
                                 index -= 1;
                                 viewButton(index);
-                                tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                                main_textview.setText(String.valueOf(cho.charAt(index)));
+                                tts.speak(String.valueOf(six.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(String.valueOf(six.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("1." + String.valueOf(six_send.charAt(index)));
                                 }
                             }
                         }
                         else if(check_integer == 1){
                             Log.i("next", "");
-                            if(index < cho.length() - 1){
+                            if(index < six.length() - 1){
                                 index += 1;
                                 viewButton(index);
-                                tts.speak(String.valueOf(cho.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
-                                main_textview.setText(String.valueOf(cho.charAt(index)));
+                                tts.speak(String.valueOf(six.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(String.valueOf(six.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(cho_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("1." + String.valueOf(six_send.charAt(index)));
                                 }
                             }
                         }
@@ -172,5 +153,18 @@ public class Mode_one extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    private void viewButton(int index){
+        if(index <= 0){
+            six_pre_button.setVisibility(View.GONE);
+        }
+        else if(index > 0 && index < six.length() - 1){
+            six_pre_button.setVisibility(View.VISIBLE);
+            six_next_button.setVisibility(View.VISIBLE);
+        }
+        else if(index >= six.length() - 1){
+            six_next_button.setVisibility(View.GONE);
+        }
     }
 }

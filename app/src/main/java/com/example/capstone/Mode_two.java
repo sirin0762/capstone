@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,10 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.capstone.MyApplication.ConnectedBluetoothThread;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
 import static android.speech.tts.TextToSpeech.ERROR;
+import static com.example.capstone.MyApplication.mBluetoothHandler;
 
 
 public class Mode_two extends AppCompatActivity {
@@ -26,19 +30,15 @@ public class Mode_two extends AppCompatActivity {
     ImageButton jung_pre_button;
     ImageButton jung_next_button;
     TextView main_textview;
-
-
-    static Handler mBluetoothHandler;
-
+    
     ConnectedBluetoothThread mThreadConnectedBluetooth;
-    BluetoothSocket mBluetoothSocket;
 
     String jung = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
     String jung_send = "가개갸걔거게겨계고과괘괴교구궈궤귀규그긔기";
     
     int index = -1;
-    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
+    Date d1 = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +100,61 @@ public class Mode_two extends AppCompatActivity {
                 }
             }
         });
+
+        mBluetoothHandler = new Handler(){
+            public void handleMessage(android.os.Message msg){
+                if(msg.what == MyApplication.BT_MESSAGE_READ){
+                    String readMessage = null;
+                    Date d2 = new Date();
+                    try {
+                        readMessage = new String((byte[]) msg.obj, "UTF-8");
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    char check = readMessage.replace("/r", "").charAt(0);
+                    long sec = (d2.getTime() - d1.getTime()) / 1000;
+                    d1 = d2;
+
+                    if(sec > 0){
+                        int check_integer = 100;
+                        try{
+                            check_integer = Integer.parseInt(String.valueOf(check));
+                            Log.i("check_integer", String.valueOf(check_integer));
+                        }
+                        catch (Exception e){
+                            //
+                        }
+                        if(check_integer  == 0){
+                            Log.i("pre", "");
+                            if(index > 0){
+                                index -= 1;
+                                viewButton(index);
+                                tts.speak(String.valueOf(jung.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(String.valueOf(jung.charAt(index)));
+                                main_textview.setTextSize(100);
+                                if(mThreadConnectedBluetooth != null) {
+                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jung_send.charAt(index)));
+                                }
+                            }
+                        }
+                        else if(check_integer == 1){
+                            Log.i("next", "");
+                            if(index < jung.length() - 1){
+                                index += 1;
+                                viewButton(index);
+                                tts.speak(String.valueOf(jung.charAt(index)), TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(String.valueOf(jung.charAt(index)));
+                                main_textview.setTextSize(100);
+                                if(mThreadConnectedBluetooth != null) {
+                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jung_send.charAt(index)));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
     }
 
     private void viewButton(int index){

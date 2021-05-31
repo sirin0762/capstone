@@ -160,10 +160,9 @@
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/background_words">
+            android:background="@drawable/background_four">
 
             <TextView
-                android:id="@+id/test_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -172,6 +171,52 @@
                 android:layout_gravity="center"/>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mode_five"
+            android:layout_width="118dp"
+            android:layout_height="130dp"
+            android:layout_below="@+id/mode_two"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/mode_four"
+            android:background="@drawable/background_five"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="짧은 글"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mode_six"
+            android:layout_below="@+id/mode_three"
+            android:layout_toRightOf="@id/mode_five"
+            android:layout_width="120dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/background_six">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="긴 글"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
 

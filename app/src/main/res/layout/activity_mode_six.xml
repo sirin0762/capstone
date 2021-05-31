@@ -11,8 +11,8 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/background_main_four">
-        
+        android:background="@drawable/background_main_six">
+
         <TextView
             android:id="@+id/title_title"
             android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:text="낱말모드"
+            android:text="긴 글 모드"
             android:fontFamily="@font/nanumpenscript"/>
         <TextView
             android:layout_below="@+id/title_title"
@@ -37,7 +37,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/four"
+        android:id="@+id/six"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -45,28 +45,29 @@
         android:background="@drawable/background_gray">
 
         <ImageButton
-            android:id="@+id/four_pre_button"
-            android:layout_toLeftOf="@id/four_textview"
+            android:id="@+id/six_pre_button"
+            android:layout_toLeftOf="@id/six_textview"
             android:layout_marginRight="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="이전"
             android:src="@drawable/left_button"
             android:scaleType="fitCenter"
             android:background="@color/transparent"/>
 
         <TextView
-            android:id="@+id/four_textview"
+            android:id="@+id/six_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="낱말"
+            android:text="긴 글"
             android:textColor="@color/black"
             android:textSize="80sp" />
 
         <ImageButton
-            android:id="@+id/four_next_button"
-            android:layout_toRightOf="@id/four_textview"
+            android:id="@+id/six_next_button"
+            android:layout_toRightOf="@id/six_textview"
             android:layout_marginLeft="50dp"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
