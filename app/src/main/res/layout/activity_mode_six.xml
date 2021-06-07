@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:text="긴 글 모드"
+            android:text="게임 모드"
             android:fontFamily="@font/nanumpenscript"/>
         <TextView
             android:layout_below="@+id/title_title"
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="긴 글"
+            android:text="게임"
             android:textColor="@color/black"
             android:textSize="80sp" />
 
@@ -78,5 +78,20 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_below="@+id/six"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/answer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:backgroundTint="#DADADA"
+            android:text="정답"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

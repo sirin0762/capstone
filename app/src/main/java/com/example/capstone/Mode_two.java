@@ -134,7 +134,7 @@ public class Mode_two extends AppCompatActivity {
                                 main_textview.setText(String.valueOf(jung.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jung_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("2." + String.valueOf(jung_send.charAt(index)));
                                 }
                             }
                         }
@@ -147,7 +147,7 @@ public class Mode_two extends AppCompatActivity {
                                 main_textview.setText(String.valueOf(jung.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jung_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("2." + String.valueOf(jung_send.charAt(index)));
                                 }
                             }
                         }

@@ -30,8 +30,8 @@ public class Mode_three extends AppCompatActivity {
     
     ConnectedBluetoothThread mThreadConnectedBluetooth;
 
-    String jong = "ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
-    String jong_send = "각갂갃간갅갆갇갈갉갊갋갌갍갏감갑값갓갔강갖갗갘같갚갛";
+    String jong = "ㄱㄲㄳㄴㄵㄶㄷㄹㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+    String jong_send = "각갂갃간갅갆갇갈감갑값갓갔강갖갗갘같갚갛";
     
     int index = -1;
     
@@ -132,7 +132,7 @@ public class Mode_three extends AppCompatActivity {
                                 main_textview.setText(String.valueOf(jong.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jong_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("3." + String.valueOf(jong_send.charAt(index)));
                                 }
                             }
                         }
@@ -145,7 +145,7 @@ public class Mode_three extends AppCompatActivity {
                                 main_textview.setText(String.valueOf(jong.charAt(index)));
                                 main_textview.setTextSize(100);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("1." + String.valueOf(jong_send.charAt(index)));
+                                    mThreadConnectedBluetooth.write("3." + String.valueOf(jong_send.charAt(index)));
                                 }
                             }
                         }

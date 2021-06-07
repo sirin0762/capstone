@@ -33,7 +33,7 @@ public class Mode_five extends AppCompatActivity {
     String temp = "";
 
     int index = -1;
-    int sub_index = 0;
+    int sub_index = -1;
     Date d1 = new Date();
 
 
@@ -109,7 +109,7 @@ public class Mode_five extends AppCompatActivity {
             public void handleMessage(android.os.Message msg){
                 if(msg.what == MyApplication.BT_MESSAGE_READ){
                     String readMessage = null;
-
+                    String send_w = "";
                     Date d2 = new Date();
                     try {
                         readMessage = new String((byte[]) msg.obj, "UTF-8");
@@ -138,10 +138,8 @@ public class Mode_five extends AppCompatActivity {
                                 tts.speak(five[index], TextToSpeech.QUEUE_FLUSH, null);
                                 main_textview.setText(five[index]);
                                 main_textview.setTextSize(20);
-                                temp = five[index];
-                                if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("0." +five[index]);
-                                }
+                                temp = five[index].replace(" ", "");
+                                sub_index = -1;
                             }
                         }
                         else if(check_integer == 1){
@@ -152,13 +150,36 @@ public class Mode_five extends AppCompatActivity {
                                 tts.speak(five[index], TextToSpeech.QUEUE_FLUSH, null);
                                 main_textview.setText(five[index]);
                                 main_textview.setTextSize(20);
-                                temp = five[index];
+                                temp = five[index].replace(" ", "");;
+                                sub_index = -1;
+                            }
+                        }
+                        else if(check_integer == 2){
+                            Log.i("next_w", "");
+                            if(sub_index < temp.length() - 1){
+                                sub_index += 1;
+                                send_w = String.valueOf(temp.charAt(sub_index));
+                                tts.speak(send_w, TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(send_w);
+                                main_textview.setTextSize(60);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("0." + five[index]);
+                                    mThreadConnectedBluetooth.write("0." + send_w);
                                 }
                             }
                         }
-
+                        else if(check_integer == 3){
+                            Log.i("pre_w", "");
+                            if(sub_index > 0){
+                                sub_index -= 1;
+                                send_w = String.valueOf(temp.charAt(sub_index));
+                                tts.speak(send_w, TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(send_w);
+                                main_textview.setTextSize(60);
+                                if(mThreadConnectedBluetooth != null) {
+                                    mThreadConnectedBluetooth.write("0." + send_w);
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -36,9 +36,10 @@ public class Mode_four extends AppCompatActivity {
             " 모래 마스크 모자 무지개 마차 비누 배 바지 번호 분홍 소시지 시계 시소 색종이 손가락 옷 양파 여우 우유 오이 자두 조개 저고리 지도 지우개" +
             " 차 초가 치마 치즈 체조 코끼리 키위 케이크 카메라 커피 타이어 토끼 타조 톱 태양 포도 피아노 피자 파도 파랑 하마 휴지 혀 해파리 호수";
     String[] words = word.split(" ");
-    String temp = "";
 
     int length = words.length;
+
+    String temp = "";
 
     int index = -1;
     int sub_index = -1;
@@ -142,6 +143,7 @@ public class Mode_four extends AppCompatActivity {
             public void handleMessage(android.os.Message msg){
                 if(msg.what == MyApplication.BT_MESSAGE_READ){
                     String readMessage = null;
+                    String send_w = "";
                     Date d2 = new Date();
                     try {
                         readMessage = new String((byte[]) msg.obj, "UTF-8");
@@ -172,9 +174,7 @@ public class Mode_four extends AppCompatActivity {
                                 main_textview.setText(split_words[index][random]);
                                 main_textview.setTextSize(60);
                                 temp = split_words[index][random];
-                                if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("0." + split_words[index][random]);
-                                }
+                                sub_index = -1;
                             }
                         }
                         else if(check_integer == 1){
@@ -187,23 +187,34 @@ public class Mode_four extends AppCompatActivity {
                                 main_textview.setText(split_words[index][random]);
                                 main_textview.setTextSize(60);
                                 temp = split_words[index][random];
-                                if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("0." + split_words[index][random]);
-                                }
+                                sub_index = -1;
                             }
                         }
                         else if(check_integer == 2){
                             Log.i("next_w", "");
                             if(sub_index < temp.length() - 1){
                                 sub_index += 1;
-                                tts.speak(temp.substring(sub_index - 1, sub_index), TextToSpeech.QUEUE_FLUSH, null);
-                                main_textview.setText(temp.substring(sub_index - 1, sub_index));
+                                send_w = String.valueOf(temp.charAt(sub_index));
+                                tts.speak(send_w, TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(send_w);
                                 main_textview.setTextSize(60);
                                 if(mThreadConnectedBluetooth != null) {
-                                    mThreadConnectedBluetooth.write("0." + temp.substring(sub_index - 1, sub_index));
+                                    mThreadConnectedBluetooth.write("0." + send_w);
                                 }
                             }
-
+                        }
+                        else if(check_integer == 3){
+                            Log.i("pre_w", "");
+                            if(sub_index > 0){
+                                sub_index -= 1;
+                                send_w = String.valueOf(temp.charAt(sub_index));
+                                tts.speak(send_w, TextToSpeech.QUEUE_FLUSH, null);
+                                main_textview.setText(send_w);
+                                main_textview.setTextSize(60);
+                                if(mThreadConnectedBluetooth != null) {
+                                    mThreadConnectedBluetooth.write("0." + send_w);
+                                }
+                            }
                         }
                     }
                 }
